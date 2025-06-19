@@ -1,7 +1,7 @@
 <h1 align='center'>Adaptive Graph Pruning for Multi-Agent Communication</h1>
 
 <div align='center'>
-    <strong>Yuhao Wang</strong></a>
+    <strong>Boyi Li</strong></a>
     ·
     <strong>Zhonghan Zhao</strong></a>
     ·
