@@ -43,6 +43,11 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 </head>
 <body>
 
@@ -142,7 +147,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Large Language Model (LLM) based multi-agent systems have shown remarkable performance in various tasks, especially when enhanced through collaborative communication. However, current methods often rely on a fixed number of agents and static communication structures, limiting their ability to adapt to varying task complexities. In this paper, we propose Adaptive Graph Pruning (AGP), a novel task-adaptive multi-agent collaboration framework that jointly optimizes agent quantity (hard-pruning) and communication topology (soft-pruning). Specifically, our method employs a two-stage training strategy: firstly, independently training soft-pruning networks for different agent quantities to determine optimal agent-quantity-specific complete graphs and positional masks across specific tasks; and then jointly optimizing hard-pruning and soft-pruning within a maximum complete graph to dynamically configure the number of agents and their communication topologies per task. Extensive experiments demonstrate that our approach is: (1) High-performing, achieving state-of-the-art results across six benchmarks and consistently generalizes across multiple mainstream LLM architectures, with a increase in performance of 2.58% ~ 9.84%; (2) Task-adaptive, dynamically constructing optimized communication topologies tailored to specific tasks, with an extremely high performance in all three task categories (general reasoning, mathematical reasoning, and code generation); (3) Token-economical, having fewer training steps and token consumption at the same time, with a decrease in token consumption of 90%+; and (4) Training-efficient, achieving high performance with very few training steps compared with other methods. The performance will surpass the existing baselines after about ten steps of training under six benchmarks.
+            Large Language Model (LLM) based multi-agent systems have shown remarkable performance in various tasks, especially when enhanced through collaborative communication. However, current methods often rely on a fixed number of agents and static communication structures, limiting their ability to adapt to varying task complexities. In this paper, we propose Adaptive Graph Pruning (<b>AGP</b>), a novel task-adaptive multi-agent collaboration framework that jointly optimizes agent quantity (hard-pruning) and communication topology (soft-pruning). Specifically, our method employs a two-stage training strategy: firstly, independently training soft-pruning networks for different agent quantities to determine optimal agent-quantity-specific complete graphs and positional masks across specific tasks; and then jointly optimizing hard-pruning and soft-pruning within a maximum complete graph to dynamically configure the number of agents and their communication topologies per task. Extensive experiments demonstrate that our approach is: <b>(1) High-performing</b>, achieving state-of-the-art results across six benchmarks and consistently generalizes across multiple mainstream LLM architectures, with a increase in performance of \(2.58\%\sim 9.84\%\); <b>(2) Task-adaptive</b>, dynamically constructing optimized communication topologies tailored to specific tasks, with an extremely high performance in all three task categories (general reasoning, mathematical reasoning, and code generation); <b>(3) Token-economical</b>, having fewer training steps and token consumption at the same time, with a decrease in token consumption of \(90\%+\); and <b>(4) Training-efficient</b>, achieving high performance with very few training steps compared with other methods. The performance will surpass the existing baselines after about ten steps of training under six benchmarks.
           </p>
         </div>
       </div>
@@ -158,14 +163,14 @@
       <div class="column is-full">
         <h2 class="title is-3">Framework</h2>
         <div class="content has-text-justified">
-          <img src="static/images/framework.png" alt="Framework"/>
+          <img src="static/images/framework.png" alt="Framework" style="width: 100%; height: auto;"/>
           <p>
             <u>A</u>daptive <u>G</u>raph <u>P</u>runing (termed as <b>AGP</b>) first mines high-utility sub-graphs from a fixed pool of heterogeneous LLM-agents and preserves their edge labels and node masks as supervision. The next section sets up notation, casts these ideas in graph-topological terms, and details the multi-agent communication protocol that AGP learns to instantiate for any new query.
           </p>
           <p>
             <ul>
               <li> Stage I mines near-optimal sub-graphs from a heterogeneous agent pool.</li>
-              <li> Stage II trains a joint soft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query Q.</li>
+              <li> Stage II trains a joint soft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query \(\mathcal{Q}\).</li>
             </ul>
           </p>
         </div>
@@ -174,6 +179,109 @@
   </div>
 </section>
 <!-- End framework -->
+
+<!-- Experiments -->>
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-full">
+        <h2 class="title is-3">Experiments</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>AGP</b> delivers the strongest overall accuracy.
+          </p>
+        </div>
+        <figure style="text-align: center;">
+          <img src="static/images/table.png" alt="table" style="width: 100%; height: auto;"/>
+          <figcaption style="font-style: normal; color: gray;">
+            Performance comparison with single-agent approaches, multi-agent topologies, and <b>AGP</b>. The base LLM for all baselines is <i>gpt-4o-mini</i>. We <b>bold</b> the best results and <u>underline</u> the runner-ups. "Mul." and "Ada." indicate multi-agent support and task adaptivity, respectively. ×, △, and ✓denote no, partial, and full support.
+          </figcaption>
+        </figure>
+        <br>
+        <div class="content has-text-justified">  
+          <p>
+            <b>AGP</b> not only attains higher final accuracy but also achieves baseline-beating performance in fewer than ten optimization steps, evidencing markedly better sample- and compute-efficiency during training.
+          </p>
+        </div>
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/efficiency1.png" alt="efficiency1"/>
+              </figure>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/efficiency2.png" alt="efficiency2"/>
+              </figure>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/efficiency3.png" alt="efficiency3"/>
+              </figure>
+            </div>
+          </div>
+          <p style="text-align: center; color: gray;">
+            Under MMLU, GSM8k, and HummanEval benchmarks, the curves of the performance of <b>AGP</b> and G-Designer as the number of training steps increases. Starting from the fifth step, there will be an evaluation after each batch is trained.
+          </p>
+        </div>
+        <br>
+        <div class="content has-text-justified">
+          <p>
+            <b>AGP</b> can provide more accurate and economical solutions in complex settings without the iterative overhead of full architecture searches.
+          </p>
+        </div>
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/MMLU.png" alt="tokenMMLU"/>
+              </figure>
+              <h2 class="subtitle has-text-centered">
+                MMLU
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/GSM8K.png" alt="tokenGSM8K"/>
+              </figure>
+              <h2 class="subtitle has-text-centered">
+                GSM8K
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/SVAMP.png" alt="tokenSVAMP"/>
+              </figure>
+              <h2 class="subtitle has-text-centered">
+                SVAMP
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <figure style="text-align: center;">
+                <img src="static/images/HumanEval.png" alt="tokenHumanEval"/>
+              </figure>
+              <h2 class="subtitle has-text-centered">
+                HumanEval
+              </h2>
+            </div>
+          </div>
+          <p style="text-align: center; color: gray;">
+            Visualization of the performance and the number of prompt tokens of different multi-agent communication works across MMLU, GSM8K, SVAMP, and HumanEval benchmarks
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End experiments -->
 
 <!-- Image carousel -->
 <section class="hero is-small">
