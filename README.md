@@ -27,7 +27,7 @@ to instantiate for any new query.
 
 - Stage I mines near-optimal sub-graphs from a heterogeneous agent pool.
   
-- Stage II trains a jointsoft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query $\mathcal{Q}$.
+- Stage II trains a joint soft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query $\mathcal{Q}$.
 
 ![](asset/framework.png)
 
