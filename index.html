@@ -170,11 +170,9 @@
         <div class="content has-text-justified">
           <p>
             <u>A</u>daptive <u>G</u>raph <u>P</u>runing (termed as <b>AGP</b>) first mines high-utility sub-graphs from a fixed pool of heterogeneous LLM-agents and preserves their edge labels and node masks as supervision. The next section sets up notation, casts these ideas in graph-topological terms, and details the multi-agent communication protocol that AGP learns to instantiate for any new query.
-          </p>
-          <p>
             <ul>
-              <li> Stage I mines near-optimal sub-graphs from a heterogeneous agent pool.</li>
-              <li> Stage II trains a joint soft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query \(\mathcal{Q}\).</li>
+              <li><b>Stage I</b> mines near-optimal sub-graphs from a heterogeneous agent pool.</li>
+              <li><b>Stage II</b> trains a joint soft–/hard–pruning network that instantiates an adaptive communication topology for any incoming query \(\mathcal{Q}\).</li>
             </ul>
           </p>
         </div>
@@ -184,8 +182,41 @@
 </section>
 <!-- End framework -->
 
-<!-- Experiments -->>
+<!-- Dataset Composition -->>
 <section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-full">
+        <h2 class="title is-3">Dataset Composition</h2>
+        <video poster="" id="dataset" autoplay controls muted loop height="100%">
+          <!-- Your video here -->
+          <source src="static/videos/dataset.mp4"
+          type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+            Our supervision corpus from <b>Stage I</b> have both the <i>micro</i> and <i>macro</i> structure. Each labeled pair is a triple:
+            <ul>
+              <li><b>Task description:</b> a natural-language prompt that an LLM teammust solve (e.g. implement 'flip_case').</li>
+              <li><b>Edge-weight matrix:</b> the edge-weight matrix of the <i>max-complete</i> graph</li>
+              <li><b>Node mask:</b> the binary node-mask vector to identify agents that actually participate in the task.</li>
+            </ul>
+            The corpus totals <b>460</b> supervision graphs, drawn from three domains:
+            <ul>
+              <li><b>General Reasoning</b> (<i>200 pairs</i> ): commonsense QA, humanities, social sciences; serves to anchor broad language understanding.</li>
+              <li><b>Mathematical Reasoning</b> (<i>100 pairs</i> ): arithmetic, algebra, and word-problem reasoning; stresses symbolic manipulation and multi-step deduction.</li>
+              <li><b>Code Generation</b> (<i>160 pairs</i> ): implement functions from I/O specifications or docstrings; examines the ability to plan, execute, and self-verify algorithmic tasks.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Dataset Composition -->
+
+<!-- Experiments -->>
+<section class="section is-small">
   <div class="container is-max-desktop">
     <div class="columns is-centered ">
       <div class="column is-full">
