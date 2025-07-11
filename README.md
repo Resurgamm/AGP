@@ -16,6 +16,7 @@
 
 <div align='center'>
     <a href='https://arxiv.org/abs/2506.02951'><img src='http://img.shields.io/badge/cs.CL-arXiv%3A2506.02951-B31B1B.svg'></a>
+    <hr>
     ECAI 2025
 </div>
 
